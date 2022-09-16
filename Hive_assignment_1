@@ -1,0 +1,37 @@
+a. Calculate total sales per year
+
+      select year_id as year, sum(sales) as total_sale from sales_order_orc group by (year_id);
+
+b. Find a product for which maximum orders were placed
+
+      select product_line as product, count(order_number) as Total_sales from sales_order_orc group by product_line order by Total_sales desc  limit 1;
+
+c.Calculate the total sales for each quarter
+
+      select year_id as year, qtr_id as quarter, sum (sales) as total_sales from sales_order_orc group by year_id,qtr_id;
+
+d. In which quarter sales was minimum
+  
+      select year_id as year, qtr_id as quarter, sum (sales) as total_sales from sales_order_orc group by year_id,qtr_id order by total_sales asc limit 1;
+
+e. In which country sales was maximum and in which country sales was minimum
+    
+     e.1 ( Max sales) select xyz.country as Max_sale_country, xyz.sales as Total_sales from (select country as country, sum(sales) as sales from sales_order_orc group by country order by sales desc limit 1) as xyz;
+
+    e.2 ( Min sales) select xyz.country as Min_sale_country, xyz.sales as Total_sales from (select country as country, sum(sales) as sales from sales_order_orc group by country order by sales  limit 1) as xyz;
+
+
+
+f. Calculate quartelry sales for each city
+
+    select city,year_id as year, qtr_id as quarter,  sum(sales) from sales_order_orc group by city,year_id,qtr_id;
+
+g.Find a month for each year in which maximum number of quantities were sold
+  >>>unsolved<<<
+
+  proposed solution
+    1. sum of all the quantity ordered month wise year wise
+    2. Agrregation by yearwise and monthwise
+    3. splitting the result year wise and finding maximum vlaue
+
+  
