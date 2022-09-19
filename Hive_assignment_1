@@ -33,5 +33,10 @@ g.Find a month for each year in which maximum number of quantities were sold
     1. sum of all the quantity ordered month wise year wise
     2. Agrregation by yearwise and monthwise
     3. splitting the result year wise and finding maximum vlaue
+    
+select year_id, month_id,status,totalsale, 
+row_number() over (partition by year_id order by totalsale desc ) as row 
+from (select year_id,month_id, status, sum(quantity_ordered) as totalsale from sales_order_orc  where status  = "Shipped" group by year_id,month_id,status)as t1
+ where row=1;
 
   
